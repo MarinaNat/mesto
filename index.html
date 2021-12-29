@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+    <header class="header">
+        <a class="header__link" href="#">
+            <img class="logo" src="./images/logo.svg" alt="Логотип">
+        </a>
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/image.jpg" alt="Фотография Жак-Ив Кусто">
+            <div class="profile__info">
+                <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                <p class="profile__user-status">Исследователь океана</p>
+                <button class="profile__button-edit"></button>
+            </div>
+            <button class="profile__button-add"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__foto" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Фотография Карачаевск" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Карачаевск</h2>
+                    <button class="like element__like "></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__foto" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Фотография Гора Эльбрус" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Гора Эльбрус</h2>
+                    <button class="like element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__foto" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Фотография Домбай" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Домбай</h2>
+                    <button class="like element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__foto" src="./images/arab-emirates.jpg" alt="Фотография Арабские Эмираты" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Арабские Эмираты</h2>
+                    <button class="like element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__foto" src="./images/venice.jpg" alt="Фотография Венеция" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Венеция</h2>
+                    <button class="like element__like"></button>
+                </div>
+            </div>
+            <div class="element">
+                <img class="element__foto" src="./images/ramsau-bei-berchtesgaden.jpg" alt="Фотография Рамзау-бай-Берхтесгаден" data-type="auto">
+                <div class="element__info">
+                    <h2 class="element__text">Рамзау-бай-Берхтесгаден</h2>
+                    <button class="like element__like"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2021 Марина Натальина</p>
+    </footer>
+    <section class="overlay">
+        <form class="popup">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" class="popup__user-name" value="Жак-Ив Кусто">
+            <div class="popup__line"></div>
+            <input type="text" class="popup__user-status" value="Исследователь океана">
+            <div class="popup__line"></div>
+            <button class="popup__save-btn">Сохранить</button>
+            <span class="popup__close-btn"></span>
+        </form>
+    </section>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
