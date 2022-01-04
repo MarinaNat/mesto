@@ -7,6 +7,8 @@
     background-image: url(../../../images/close-icon.svg);
     transition: opacity 0.3s ease-in-out;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .popup__close-btn:hover {

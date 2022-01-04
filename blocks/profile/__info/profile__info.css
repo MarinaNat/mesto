@@ -5,8 +5,7 @@
     margin: auto 0;
     grid-column: 2/3;
     display: grid;
-    column-gap: 18px;
-    row-gap: 16px;
+    row-gap: 8px;
 }
 
 @media screen and (max-width: 700px) {
@@ -15,13 +14,13 @@
         grid-template-columns: 24px auto 24px;
         grid-column: 1/2;
         justify-content: center;
-        row-gap: 10px;
-        margin-bottom: 34px;
+        row-gap: 9px;
+        margin-bottom: 31px;
     }
 }
 
 @media screen and (max-width: 450px) {
     .profile__info {
-        column-gap: 10px;
+        column-gap: 7px;
     }
 }

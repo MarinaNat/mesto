@@ -20,9 +20,9 @@
             <div class="profile__info">
                 <h1 class="profile__user-name">Жак-Ив Кусто</h1>
                 <p class="profile__user-status">Исследователь океана</p>
-                <button class="profile__button-edit"></button>
+                <button class="profile__button-edit" type="button" aria-label="редактирование профиля"></button>
             </div>
-            <button class="profile__button-add"></button>
+            <button class="profile__button-add" type="button"></button>
         </section>
         <section class="elements">
             <div class="element">
@@ -72,17 +72,18 @@
     <footer class="footer">
         <p class="footer__copyright">© 2021 Марина Натальина</p>
     </footer>
-    <section class="overlay">
-        <form class="popup">
+    <article class="overlay">
+        <form name="popup" class="popup">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__user-name" value="Жак-Ив Кусто">
-            <div class="popup__line"></div>
-            <input type="text" class="popup__user-status" value="Исследователь океана">
-            <div class="popup__line"></div>
-            <button class="popup__save-btn">Сохранить</button>
-            <span class="popup__close-btn"></span>
+            <fieldset class="popup__info">
+                <input type="text" name="userName" class="popup__user popup__user_name">
+                <input type="text" name="userStatus" class="popup__user popup__user_status">
+            </fieldset>
+
+            <button class="popup__save-btn" type="submit">Сохранить</button>
+            <button class="popup__close-btn" type="button"></button>
         </form>
-    </section>
+    </article>
     <script src="./scripts/index.js"></script>
 </body>
 

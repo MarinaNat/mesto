@@ -1,4 +1,7 @@
 .profile__user-status {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -10,8 +13,9 @@
 
 @media screen and (max-width: 700px) {
     .profile__user-status {
-        grid-column: 2/3;
-        justify-self: center;
+        width: 100%;
+        text-align: center;
+        grid-column: 1/4;
     }
 }
 
