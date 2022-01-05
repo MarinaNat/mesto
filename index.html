@@ -22,49 +22,49 @@
                 <p class="profile__user-status">Исследователь океана</p>
                 <button class="profile__button-edit" type="button" aria-label="редактирование профиля"></button>
             </div>
-            <button class="profile__button-add" type="button"></button>
+            <button class="profile__button-add" type="button" aria-label="Добавить фотографию"></button>
         </section>
         <section class="elements">
             <div class="element">
                 <img class="element__foto" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Фотография Карачаевск" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Карачаевск</h2>
-                    <button class="like element__like "></button>
+                    <button class="like element__like " type="button" aria-label="Лайк"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__foto" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Фотография Гора Эльбрус" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Гора Эльбрус</h2>
-                    <button class="like element__like"></button>
+                    <button class="like element__like" type="button" aria-label="Лайк"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__foto" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Фотография Домбай" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Домбай</h2>
-                    <button class="like element__like"></button>
+                    <button class="like element__like" type="button" aria-label="Лайк"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__foto" src="./images/arab-emirates.jpg" alt="Фотография Арабские Эмираты" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Арабские Эмираты</h2>
-                    <button class="like element__like"></button>
+                    <button class="like element__like" type="button" aria-label="Лайк"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__foto" src="./images/venice.jpg" alt="Фотография Венеция" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Венеция</h2>
-                    <button class="like element__like"></button>
+                    <button class="like element__like" type="button" aria-label="Лайк"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__foto" src="./images/ramsau-bei-berchtesgaden.jpg" alt="Фотография Рамзау-бай-Берхтесгаден" data-type="auto">
                 <div class="element__info">
                     <h2 class="element__text">Рамзау-бай-Берхтесгаден</h2>
-                    <button class="like element__like"></button>
+                    <button class="like element__like" type="button" aria-label="Лайк"></button>
                 </div>
             </div>
         </section>
@@ -76,12 +76,12 @@
         <form name="popup" class="popup">
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__info">
-                <input type="text" name="userName" class="popup__user popup__user_name">
-                <input type="text" name="userStatus" class="popup__user popup__user_status">
+                <input type="text" name="userName" class="popup__user popup__user_type_name">
+                <input type="text" name="userStatus" class="popup__user popup__user_type_status">
             </fieldset>
 
             <button class="popup__save-btn" type="submit">Сохранить</button>
-            <button class="popup__close-btn" type="button"></button>
+            <button class="popup__close-btn" type="button" aria-label="Закрыть"></button>
         </form>
     </article>
     <script src="./scripts/index.js"></script>

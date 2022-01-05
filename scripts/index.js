@@ -1,11 +1,11 @@
 const buttonProfile = document.querySelector('.profile__button-edit');
 const buttonClose = document.querySelector('.popup__close-btn ');
 const overlay = document.querySelector('.overlay');
-let overlayActive = 'overlay__active';
+let overlayActive = 'overlay_active';
 let profileInfo = document.querySelector('.profile__info');
 let buttonSave = document.querySelector('.popup__save-btn');
-let nameInput = document.querySelector('.popup__user_name');
-let jobInput = document.querySelector('.popup__user_status');
+let nameInput = document.querySelector('.popup__user_type_name');
+let jobInput = document.querySelector('.popup__user_type_status');
 let profileUserName = document.querySelector('.profile__user-name');
 let profileUserStatus = document.querySelector('.profile__user-status');
 let popup = document.querySelector('.popup');
