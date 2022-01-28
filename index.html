@@ -29,10 +29,10 @@
         </section>
     </main>
     <footer class="footer">
-        <p class="footer__copyright">© 2021 Марина Натальина</p>
+        <p class="footer__copyright">© 2022 Марина Натальина</p>
     </footer>
-    <article class="overlay">
-        <form name="popup" class="popup">
+    <article class="overlay overlay_profile">
+        <form name="popup-profile" class="popup popup_profile">
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__info">
                 <input type="text" name="userName" class="popup__user popup__user_type_name">
@@ -44,7 +44,7 @@
         </form>
     </article>
     <article class="overlay overlay_element">
-        <form name="popup" class="popup  popup_card">
+        <form name="popup-card" class="popup  popup_card">
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__info">
                 <input type="text" name="elementName" placeholder="Название" class="popup__element popup__element_type_name">
@@ -65,14 +65,16 @@
     <template id="element-template">
         <div class="element">
             <button class="element__delete-btn" type="button" aria-label="Кнопка удаления"></button>
-            <img class="element__foto" data-type="auto">
+            <div class="element__container">
+                <img class="element__foto" data-type="auto"> 
+            </div>
             <div class="element__info">
                 <h2 class="element__text"></h2>
                 <button class="like element__like" type="button" aria-label="Лайк"></button>
             </div>
         </div>
     </template>
-
+    <script src="./scripts/initialCards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 
