@@ -23,39 +23,7 @@ const picture = document.querySelector('.full-screen__image');
 const pictureTitle = document.querySelector('.full-screen__title');
 const buttonCloseFullImage = document.querySelector('.full-screen__close-btn');
 
-
-/*const initialCards = [{
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];*/
-
-function openPopupCard(event) {
-    event.preventDefault();
-    overlayCard.classList.add(overlayActive);
-}
-
-buttonCreate.addEventListener('click', openPopupCard);
+buttonCreate.addEventListener('click', () => openPopup(overlayCard));
 
 function deleteCard(e) {
     e.target.closest('.element').remove();
