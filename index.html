@@ -32,11 +32,13 @@
         <p class="footer__copyright">© 2022 Марина Натальина</p>
     </footer>
     <article class="overlay overlay_profile">
-        <form name="popup-profile" class="popup popup_profile">
+        <form name="popup-profile" class="popup popup_profile popup_form" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__info">
-                <input type="text" name="userName" class="popup__user popup__user_type_name">
-                <input type="text" name="userStatus" class="popup__user popup__user_type_status">
+                <input id="user-name" type="text" name="userName" class="popup__input popup__user popup__user_type_name" required minlength="2" maxlength="40">
+                <span id="user-name-error" class="error"></span>
+                <input id="user-status" type="text" name="userStatus" class="popup__input popup__user popup__user_type_status" required minlength="2" maxlength="200">
+                <span id="user-status-error" class="error"></span>
             </fieldset>
 
             <button class="popup__save-btn" type="submit">Сохранить</button>
@@ -44,11 +46,13 @@
         </form>
     </article>
     <article class="overlay overlay_element">
-        <form name="popup-card" class="popup  popup_card">
+        <form name="popup-card" class="popup  popup_card popup_form" novalidate>
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__info">
-                <input type="text" name="elementName" placeholder="Название" class="popup__element popup__element_type_name">
-                <input type="text" name="elementLink" placeholder="Ссылка на картинку" class="popup__element popup__element_type_link">
+                <input id="element-name" type="text" name="elementName" placeholder="Название" class="popup__input popup__element popup__element_type_name" required minlength="2" maxlength="30">
+                <span id="element-name-error" class="error"></span>
+                <input id="element-link" type="url" name="elementLink" placeholder="Ссылка на картинку" class="popup__input popup__element popup__element_type_link" required>
+                <span id="element-link-error" class="error"></span>
             </fieldset>
 
             <button class="popup__save-btn popup__save-btn_element" type="submit">Создать</button>
@@ -75,6 +79,7 @@
         </div>
     </template>
     <script src="./scripts/initialCards.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 

@@ -14,3 +14,11 @@
     overflow: hidden;
     border-bottom: 1px solid rgb(0, 0, 0, .2);
 }
+
+.popup__element::-moz-placeholder {
+    color: #C4C4C4;
+}
+
+.popup__element::-webkit-input-placeholder {
+    color: #C4C4C4;
+}

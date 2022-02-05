@@ -3,7 +3,7 @@ const buttonClose = document.querySelector('.popup__close-btn ');
 const overlay = document.querySelector('.overlay');
 const overlayProfile = document.querySelector('.overlay_profile');
 const overlayCard = document.querySelector('.overlay_element');
-const overleyImage = document.querySelector('.overlay_image');
+const overlayImage = document.querySelector('.overlay_image');
 const overlayActive = 'overlay_active';
 const profileInfo = document.querySelector('.profile__info');
 const buttonSave = document.querySelector('.popup__save-btn');
@@ -34,7 +34,7 @@ function like(event) {
 }
 
 buttonCloseFullImage.addEventListener('click', () => {
-    closePopup(overleyImage)
+    closePopup(overlayImage)
 });
 
 //функция добавления карточек
@@ -50,11 +50,12 @@ function fillingCard(name, link) {
     cardFoto.alt = link;
     likeButton.addEventListener('click', like);
     deleteButton.addEventListener('click', deleteCard);
+    overlay.addEventListener('click', clickOverlay);
     cardFoto.addEventListener('click', function() {
         pictureTitle.textContent = name;
         picture.src = link;
         picture.alt = name;
-        openPopup(overleyImage);
+        openPopup(overlayImage);
     });
     return cardElement;
 };
@@ -95,6 +96,8 @@ buttonProfile.addEventListener('click', openPopupProfile);
 
 function openPopup(overlay) {
     overlay.classList.add(overlayActive);
+    document.addEventListener('keydown', clickEsc);
+    overlay.addEventListener('click', clickOverlay);
 }
 
 function closePopup(overlay) {
@@ -106,19 +109,17 @@ buttonClose.addEventListener('click', () => {
 });
 
 function clickOverlay(event) {
-    if (event.target === overlay) {
-        closePopup(overlayProfile);
+    if (event.target.classList.contains('overlay')) {
+        closePopup(event.target);
     }
 }
-overlay.addEventListener('click', clickOverlay);
 
 function clickEsc(event) {
     if (event.code === 'Escape') {
-        closePopup(overlayProfile);
+        const esc = document.querySelector('.overlay_active');
+        closePopup(esc);
     }
 }
-
-document.addEventListener('keydown', clickEsc);
 
 function submiteProfileForm(event) {
     event.preventDefault();
@@ -126,4 +127,5 @@ function submiteProfileForm(event) {
     profileUserStatus.textContent = jobInput.value;
     closePopup(overlayProfile)
 };
+
 profilePopupForm.addEventListener('submit', submiteProfileForm);

@@ -30,11 +30,15 @@
 @import url(../blocks/popup/__info/popup__info.css);
 @import url(../blocks/popup/__user/popup__user.css);
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
+@import url(../blocks/popup/__save-btn/_disabled/popup__save-btn_disabled.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__element/popup__element.css);
+@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(../blocks/image/__foto/image__foto.css);
 @import url(../blocks/image/__text/image__text.css);
 @import url(../blocks/full-screen/full-screen.css);
 @import url(../blocks/full-screen/__image/full-screen__image.css);
 @import url(../blocks/full-screen/__title/full-screen__title.css);
 @import url(../blocks/full-screen/__close-btn/full-screen__close-btn.css);
+@import url(../blocks/error/error.css);
+@import url(../blocks/error/_state/error_state_visible.css);
