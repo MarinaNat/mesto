@@ -37,6 +37,12 @@ buttonCloseFullImage.addEventListener('click', () => {
     closePopup(overlayImage)
 });
 
+function openImagePopup(name, link) {
+    pictureTitle.textContent = name;
+    picture.src = link;
+    picture.alt = name;
+    openPopup(overlayImage);
+}
 //функция добавления карточек
 function fillingCard(name, link) {
     const cardTemplate = document.querySelector('#element-template').content.querySelector('.element');
@@ -50,18 +56,12 @@ function fillingCard(name, link) {
     cardFoto.alt = link;
     likeButton.addEventListener('click', like);
     deleteButton.addEventListener('click', deleteCard);
-    overlay.addEventListener('click', clickOverlay);
-    cardFoto.addEventListener('click', function() {
-        pictureTitle.textContent = name;
-        picture.src = link;
-        picture.alt = name;
-        openPopup(overlayImage);
-    });
+    cardFoto.addEventListener('click', () => openImagePopup(name, link));
     return cardElement;
 };
 
 function renderCard(cardElement) {
-    cardAll.prepend(fillingCard(cardElement.name, cardElement.link));
+    cardAll.append(fillingCard(cardElement.name, cardElement.link));
 }
 //Перебор массива для создания карточек
 initialCards.forEach(function(initialCards) {
@@ -69,9 +69,9 @@ initialCards.forEach(function(initialCards) {
 });
 
 function closePopupCard() {
+    closePopup(overlayCard);
     cardNameInput.value = '';
     cardLinkInput.value = '';
-    closePopup(overlayCard);
 }
 
 buttonCloseCard.addEventListener('click', closePopupCard)
@@ -102,6 +102,8 @@ function openPopup(overlay) {
 
 function closePopup(overlay) {
     overlay.classList.remove(overlayActive);
+    document.removeEventListener('keydown', clickEsc);
+    overlay.removeEventListener('click', clickOverlay);
 }
 
 buttonClose.addEventListener('click', () => {

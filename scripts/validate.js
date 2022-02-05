@@ -1,12 +1,3 @@
-const formsValidationConfig = {
-    formSelector: '.popup_form',
-    inputSelector: '.popup__input',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'error_state_visible',
-    submitButtonSelector: '.popup__save-btn',
-    inactiveButtonClass: 'popup__save-btn_disabled',
-}
-
 function enableValidation(data) {
     const forms = [...document.querySelectorAll(data.formSelector)];
     forms.forEach(form => addFormListeners(form, data));
