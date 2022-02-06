@@ -44,7 +44,12 @@ function setSubmitButtonState(form, config) {
     button.disabled = !form.checkValidity();
     console.log(!form.checkValidity())
     button.classList.toggle(config.inactiveButtonClass, !form.checkValidity());
-    console.log(button);
+}
+
+function disabledButton() {
+    const buttonSave = document.querySelector('.popup__save-btn_element');
+    buttonSave.setAttribute('disabled', false);
+    buttonSave.classList.add('popup__save-btn_disabled');
 }
 
 enableValidation(formsValidationConfig);

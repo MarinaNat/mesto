@@ -23,7 +23,10 @@ const picture = document.querySelector('.full-screen__image');
 const pictureTitle = document.querySelector('.full-screen__title');
 const buttonCloseFullImage = document.querySelector('.full-screen__close-btn');
 
-buttonCreate.addEventListener('click', () => openPopup(overlayCard));
+buttonCreate.addEventListener('click', () => {
+    disabledButton();
+    openPopup(overlayCard);
+});
 
 function deleteCard(e) {
     e.target.closest('.element').remove();
@@ -80,7 +83,7 @@ function newfillingCards(e) {
     e.preventDefault();
     fillingCard(cardLinkInput.value, cardNameInput);
     cardAll.prepend(fillingCard(cardNameInput.value, cardLinkInput.value))
-    closePopupCard()
+    closePopupCard();
 }
 
 popupCard.addEventListener('submit', newfillingCards);
