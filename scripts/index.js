@@ -1,10 +1,14 @@
+import { FormValidator } from './FormValidator.js'
+import { initialCards, formsValidationConfig, overlayImage } from './constants.js'
+import { openPopup } from './utils.js'
+import { Card } from './Card.js'
+
 const buttonProfile = document.querySelector('.profile__button-edit');
 const buttonClose = document.querySelector('.popup__close-btn ');
 const overlay = document.querySelector('.overlay');
 const overlayProfile = document.querySelector('.overlay_profile');
 const overlayCard = document.querySelector('.overlay_element');
-const overlayImage = document.querySelector('.overlay_image');
-const overlayActive = 'overlay_active';
+export const overlayActive = 'overlay_active';
 const profileInfo = document.querySelector('.profile__info');
 const buttonSave = document.querySelector('.popup__save-btn');
 const nameInput = document.querySelector('.popup__user_type_name');
@@ -19,56 +23,37 @@ const cardLinkInput = document.querySelector('.popup__element_type_link');
 const buttonCloseCard = document.querySelector('.popup__close-btn_element');
 const buttonSaveCard = document.querySelector('.popup__save-btn_element');
 const popupCard = document.querySelector('.popup_card');
-const picture = document.querySelector('.full-screen__image');
-const pictureTitle = document.querySelector('.full-screen__title');
 const buttonCloseFullImage = document.querySelector('.full-screen__close-btn');
+const cardTemplateSelector = '#element-template'
+
+const editFormValidator = new FormValidator(formsValidationConfig, profilePopupForm);
+const addCardValidator = new FormValidator(formsValidationConfig, popupCard);
+
+editFormValidator.enableValidation()
+addCardValidator.enableValidation()
 
 buttonCreate.addEventListener('click', () => {
     disabledButton();
     openPopup(overlayCard);
 });
 
-function deleteCard(e) {
-    e.target.closest('.element').remove();
-}
-
-function like(event) {
-    event.target.classList.toggle('element__like_active');
+function disabledButton() {
+    const buttonSave = document.querySelector('.popup__save-btn_element');
+    buttonSave.setAttribute('disabled', false);
+    buttonSave.classList.add('popup__save-btn_disabled');
 }
 
 buttonCloseFullImage.addEventListener('click', () => {
     closePopup(overlayImage)
 });
 
-function openImagePopup(name, link) {
-    pictureTitle.textContent = name;
-    picture.src = link;
-    picture.alt = name;
-    openPopup(overlayImage);
-}
-//функция добавления карточек
-function fillingCard(name, link) {
-    const cardTemplate = document.querySelector('#element-template').content.querySelector('.element');
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardFoto = cardElement.querySelector('.element__foto');
-    const cardText = cardElement.querySelector('.element__text');
-    const likeButton = cardElement.querySelector('.like');
-    const deleteButton = cardElement.querySelector('.element__delete-btn');
-    cardFoto.src = link;
-    cardText.textContent = name;
-    cardFoto.alt = link;
-    likeButton.addEventListener('click', like);
-    deleteButton.addEventListener('click', deleteCard);
-    cardFoto.addEventListener('click', () => openImagePopup(name, link));
-    return cardElement;
-};
-
-function renderCard(cardElement) {
-    cardAll.append(fillingCard(cardElement.name, cardElement.link));
+function renderCard(data, cardAll) {
+    const card = new Card(data, cardTemplateSelector)
+    cardAll.append(card.fillingCard());
 }
 //Перебор массива для создания карточек
-initialCards.forEach(function(initialCards) {
-    renderCard(initialCards);
+initialCards.forEach(function(data) {
+    renderCard(data, cardAll);
 });
 
 function closePopupCard() {
@@ -81,8 +66,12 @@ buttonCloseCard.addEventListener('click', closePopupCard)
     //создание карточек из попапа
 function newfillingCards(e) {
     e.preventDefault();
-    fillingCard(cardLinkInput.value, cardNameInput);
-    cardAll.prepend(fillingCard(cardNameInput.value, cardLinkInput.value))
+    const data = {
+        name: cardNameInput.value,
+        link: cardLinkInput.value
+    }
+    const card = new Card(data, cardTemplateSelector)
+    cardAll.prepend(card.fillingCard())
     closePopupCard();
 }
 
@@ -97,12 +86,6 @@ function openPopupProfile(event) {
 
 buttonProfile.addEventListener('click', openPopupProfile);
 
-function openPopup(overlay) {
-    overlay.classList.add(overlayActive);
-    document.addEventListener('keydown', clickEsc);
-    overlay.addEventListener('click', clickOverlay);
-}
-
 function closePopup(overlay) {
     overlay.classList.remove(overlayActive);
     document.removeEventListener('keydown', clickEsc);
@@ -113,13 +96,13 @@ buttonClose.addEventListener('click', () => {
     closePopup(overlayProfile)
 });
 
-function clickOverlay(event) {
+export function clickOverlay(event) {
     if (event.target.classList.contains('overlay')) {
         closePopup(event.target);
     }
 }
 
-function clickEsc(event) {
+export function clickEsc(event) {
     if (event.code === 'Escape') {
         const esc = document.querySelector('.overlay_active');
         closePopup(esc);
