@@ -1,5 +1,3 @@
-/*import { formsValidationConfig } from './constants.js'*/
-
 export class FormValidator {
     constructor(config, form) {
         this._form = form
@@ -10,23 +8,18 @@ export class FormValidator {
     }
 
     //проверка кнопки на отправку
-    _setSubmitButtonState() {
-
+    setSubmitButtonState() {
         this._button.disabled = !this._form.checkValidity(); //выключение кнопки, если форма не валидная
         this._button.classList.toggle(this._config.inactiveButtonClass, !this._form.checkValidity()); //включени/выключение кнопки
     }
 
-    /* _disabledButton() {
-         const buttonSave = document.querySelector('.popup__save-btn_element');
-         buttonSave.setAttribute('disabled', false);
-         buttonSave.classList.add('popup__save-btn_disabled');
-     }*/
-
     _addFormListeners() {
-        this._form.addEventListener('input', () => this._setSubmitButtonState()); //вызов функции проверки кнопки
 
-        this._inputs.forEach(input => input.addEventListener('input', () => this._handleField(input))); //реакция на ввод данных
-        this._setSubmitButtonState(); //вызов функции проверки кнопки
+        this._inputs.forEach(input => input.addEventListener('input', () => {
+            this._handleField(input);
+            this.setSubmitButtonState()
+        })); //реакция на ввод данных
+
     }
 
     //показать ошибку
@@ -60,8 +53,7 @@ export class FormValidator {
     }
 
     enableValidation(event) {
-            this._form.addEventListener('submit', this._handleSubmit);
-            this._addFormListeners();
-        }
-        /*  enableValidation(formsValidationConfig) */
+        this._form.addEventListener('submit', this._handleSubmit);
+        this._addFormListeners();
+    }
 }

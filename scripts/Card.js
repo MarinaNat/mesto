@@ -14,6 +14,7 @@ export class Card {
 
     _deleteCard = () => {
         this._cardElement.remove();
+        this._cardElement = null;
     };
 
     //заполнение данными и открытие модального окна
