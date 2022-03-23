@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!--<link rel="stylesheet" href="./pages/index.css">-->
 </head>
 
 <body class="page">
     <header class="header">
         <a class="header__link" href="#">
-            <img class="logo" src="./images/logo.svg" alt="Логотип">
+            <img class="logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
         </a>
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="./images/image.jpg" alt="Фотография Жак-Ив Кусто">
+            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фотография Жак-Ив Кусто">
             <div class="profile__info">
                 <h1 class="profile__user-name">Жак-Ив Кусто</h1>
                 <p class="profile__user-status">Исследователь океана</p>
@@ -24,14 +24,12 @@
             </div>
             <button class="profile__button-add" type="button" aria-label="Добавить фотографию"></button>
         </section>
-        <section class="elements">
-
-        </section>
+        <section class="elements"></section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">© 2022 Марина Натальина</p>
     </footer>
-    <article class="overlay overlay_form overlay_profile">
+    <article class="overlay overlay_form overlay_profile" id="popup_profile">
         <form name="popup-profile" class="popup popup_profile popup_form" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__info">
@@ -45,7 +43,7 @@
             <button class="popup__close-btn" type="button" aria-label="Закрыть"></button>
         </form>
     </article>
-    <article class="overlay overlay_element">
+    <article class="overlay overlay_element" id="popup_card">
         <form name="popup-card" class="popup  popup_card popup_form" novalidate>
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__info">
@@ -59,11 +57,11 @@
             <button class="popup__close-btn popup__close-btn_element" type="button" aria-label="Закрыть"></button>
         </form>
     </article>
-    <article class="overlay overlay_picture overlay_image">
+    <article class="overlay overlay_picture overlay_image" id="overlay_image">
         <div class="full-screen">
             <img class="full-screen__image" data-type="auto">
             <h2 class="full-screen__title full-screen__title_image"></h2>
-            <button class="full-screen__close-btn" type="button" aria-label="Закрыть"></button>
+            <button class="popup__close-btn full-screen__close-btn" type="button" aria-label="Закрыть"></button>
         </div>
     </article>
     <template id="element-template">
@@ -79,8 +77,8 @@
         </div>
     </template>
     <!--<script src="./scripts/constants.js"></script>
-    <script src="./scripts/validate.js"></script>-->
-    <script type="module" src="./scripts/index.js "></script>
+    <script src="./scripts/validate.js"></script>
+    <script type="module" src="./index.js "></script>-->
 </body>
 
 </html>

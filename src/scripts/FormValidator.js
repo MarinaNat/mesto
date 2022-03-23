@@ -1,6 +1,6 @@
 export class FormValidator {
     constructor(config, form) {
-        this._form = form
+        this._form = form.querySelector('.popup_form');
         this._config = config
 
         this._inputs = [...this._form.querySelectorAll(this._config.inputSelector)] //массив инпутов
@@ -23,12 +23,12 @@ export class FormValidator {
     }
 
     //показать ошибку
-    _showError(input) {
+    _showError(input, errorMessage) {
             const { errorClass, inputErrorClass } = this._config
             input.classList.add(inputErrorClass); //добавляется подчеркивание
             const errorElement = this._form.querySelector(`#${input.id}-error`); //поиск ошибки инпута(span)
             errorElement.classList.add(errorClass);
-            errorElement.textContent = input.validationMessage; //наполняем текст ошибки стандартным из браузера
+            errorElement.textContent = errorMessage; //наполняем текст ошибки стандартным из браузера
         }
         //скрыть ошибку
     _hideError(input) {
@@ -44,7 +44,7 @@ export class FormValidator {
         if (input.validity.valid) { //проверяем валидна ли форма
             this._hideError(input); //если поле валидно скрываем ошибку
         } else {
-            this._showError(input); //если поле не валидно показываем ошибку
+            this._showError(input, input.validationMessage); //если поле не валидно показываем ошибку
         }
     }
 
@@ -52,7 +52,7 @@ export class FormValidator {
         event.preventDefault();
     }
 
-    enableValidation(event) {
+    enableValidation() {
         this._form.addEventListener('submit', this._handleSubmit);
         this._addFormListeners();
     }

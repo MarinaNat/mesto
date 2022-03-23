@@ -6,7 +6,7 @@
     grid-column: 3/4;
     border: 2px solid #fff;
     background-color: transparent;
-    background-image: url(./../../../images/add-button.svg);
+    background-image: url(./../../../src/images/add-button.svg);
     background-repeat: no-repeat;
     background-position: center;
     transition: opacity 0.3s ease-in-out;
@@ -28,6 +28,6 @@
 
 @media screen and (max-width: 450px) {
     .profile__button-add {
-        background-image: url(./../../../images/add-button-m.svg);
+        background-image: url(./../../../src/images/add-button-m.svg);
     }
 }
