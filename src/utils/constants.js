@@ -33,24 +33,28 @@ export const formsValidationConfig = {
     inactiveButtonClass: 'popup__save-btn_disabled',
 }
 
-export const overlayImage = document.querySelector('#overlay_image');
+
 export const picture = document.querySelector('.full-screen__image');
 export const pictureTitle = document.querySelector('.full-screen__title');
 export const buttonProfile = document.querySelector('.profile__button-edit');
-export const buttonClose = document.querySelector('.popup__close-btn ');
+export const buttonClose = document.querySelector('#close-btn ');
 export const overlayProfile = document.querySelector('.overlay_profile');
 export const overlayCard = document.querySelector('.overlay_element');
 export const overlayActive = 'overlay_active';
 export const nameInput = document.querySelector('#user-name');
 export const jobInput = document.querySelector('#user-status');
-export const profileUserName = document.querySelector('.profile__user-name');
-export const profileUserStatus = document.querySelector('.profile__user-status');
-export const profilePopupForm = document.querySelector('#popup_profile');
 export const buttonCreate = document.querySelector('.profile__button-add');
 export const cardNameInput = document.querySelector('.popup__element_type_name');
 export const cardLinkInput = document.querySelector('.popup__element_type_link');
 export const buttonCloseCard = document.querySelector('.popup__close-btn_element');
-export const popupCard = document.querySelector('#popup_card');
 export const buttonCloseFullImage = document.querySelector('.full-screen__close-btn');
+
 export const cardTemplateSelector = '#element-template';
-export const page = document.querySelector('.elements');
+export const page = '.elements';
+
+export const overlayImage = '#overlay_image';
+export const popupCard = '#popup_card';
+export const profilePopupForm = '#popup_profile';
+
+export const profileUserName = '.profile__user-name';
+export const profileUserStatus = '.profile__user-status';

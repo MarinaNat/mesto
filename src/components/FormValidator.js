@@ -1,6 +1,8 @@
 export class FormValidator {
-    constructor(config, form) {
-        this._form = form.querySelector('.popup_form');
+    constructor(config, popup) {
+        this._popup = document.querySelector(popup);
+        this._form = this._popup.querySelector('.popup_form');
+        this._popup = document.querySelector(popup);
         this._config = config
 
         this._inputs = [...this._form.querySelectorAll(this._config.inputSelector)] //массив инпутов
@@ -24,13 +26,18 @@ export class FormValidator {
 
     //показать ошибку
     _showError(input, errorMessage) {
-            const { errorClass, inputErrorClass } = this._config
-            input.classList.add(inputErrorClass); //добавляется подчеркивание
-            const errorElement = this._form.querySelector(`#${input.id}-error`); //поиск ошибки инпута(span)
-            errorElement.classList.add(errorClass);
-            errorElement.textContent = errorMessage; //наполняем текст ошибки стандартным из браузера
-        }
-        //скрыть ошибку
+        const { errorClass, inputErrorClass } = this._config
+        input.classList.add(inputErrorClass); //добавляется подчеркивание
+        const errorElement = this._form.querySelector(`#${input.id}-error`); //поиск ошибки инпута(span)
+        errorElement.classList.add(errorClass);
+        errorElement.textContent = errorMessage; //наполняем текст ошибки стандартным из браузера
+    }
+
+    resetError() {
+        this._inputs.forEach(input => this._hideError(input))
+    }
+
+    //скрыть ошибку
     _hideError(input) {
         const { errorClass, inputErrorClass } = this._config
         input.classList.remove(inputErrorClass); //скрывается подчеркивание
@@ -48,12 +55,12 @@ export class FormValidator {
         }
     }
 
-    _handleSubmit(event) {
-        event.preventDefault();
-    }
+    /* _handleSubmit(event) {
+         event.preventDefault();
+     }*/
 
     enableValidation() {
-        this._form.addEventListener('submit', this._handleSubmit);
+        // this._form.addEventListener('submit', this._handleSubmit);
         this._addFormListeners();
     }
 }
