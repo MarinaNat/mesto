@@ -20,6 +20,45 @@ import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
+import API from '../Api.js'
+
+
+/*const apiProfile = new API('https://mesto.nomoreparties.co/v1/cohort-38/users/me', {
+    authorization: '143aa2a9-cefa-4929-a9d6-e76e666a89c9',
+}, {
+    name: 'Marina Natalina',
+    about: 'Chemist'
+})
+
+apiProfile.getProfile().then((obj) => {
+    console.log(obj)
+})*/
+
+const api = new API({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-38',
+    headers: {
+        authorization: '143aa2a9-cefa-4929-a9d6-e76e666a89c9',
+        'Content-Type': 'application/json'
+    }
+});
+console.log(api)
+
+Promise.all([api.getProfile(), api.getCard()])
+    .then(([userData, cards]) => {
+        userId = userData._id;
+        userInfo.setUserInfo(userData);
+        cardsList.renderItems(cards);
+    }).catch((err) => {
+        console.log(err);
+    })
+
+/*api.getCard().then((obj) => {
+    //console.log(obj);
+    const initialCards = obj;
+    console.log(initialCards);
+
+});*/
+
 
 const profileFormValidator = new FormValidator(formsValidationConfig, profilePopupForm);
 const cardFormValidator = new FormValidator(formsValidationConfig, popupCard);

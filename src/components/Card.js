@@ -1,11 +1,11 @@
 export class Card {
     constructor(data, cardTemplateSelector, handleCard) {
-        this._name = data.name
-        this._link = data.link
-        this._cardTemplateSelector = cardTemplateSelector
-        this._handleCard = handleCard;
-    }
-
+            this._name = data.name
+            this._link = data.link
+            this._cardTemplateSelector = cardTemplateSelector
+            this._handleCard = handleCard;
+        }
+        //получаем разметку карточки
     _getTemplate() {
         const cardElement = document
             .querySelector(this._cardTemplateSelector)
@@ -16,6 +16,7 @@ export class Card {
         return cardElement;
     }
 
+    //наполняем карточку
     fillingCard() {
         this._element = this._getTemplate();
         this._setEventListeners()
