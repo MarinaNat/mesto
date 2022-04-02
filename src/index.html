@@ -15,11 +15,15 @@
         </a>
     </header>
     <main class="content">
+        <!--профиль-->
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Фотография Жак-Ив Кусто">
+            <div class="profile__avatar-contener">
+                <img class="profile__avatar" src="#" alt="Аватар">
+                <button type="button" class="profile__avatar-btn"></button>
+            </div>
             <div class="profile__info">
-                <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                <p class="profile__user-status">Исследователь океана</p>
+                <h1 class="profile__user-name"></h1>
+                <p class="profile__user-status"></p>
                 <button class="profile__button-edit" type="button" aria-label="редактирование профиля"></button>
             </div>
             <button class="profile__button-add" type="button" aria-label="Добавить фотографию"></button>
@@ -29,6 +33,7 @@
     <footer class="footer">
         <p class="footer__copyright">© 2022 Марина Натальина</p>
     </footer>
+    <!--popup редактирования профиля-->
     <article class="overlay overlay_form overlay_profile" id="popup_profile">
         <form name="popup-profile" class="popup popup_profile popup_form" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -38,11 +43,23 @@
                 <input id="user-status" type="text" name="userStatus" class="popup__input popup__user popup__user_type_status" required minlength="2" maxlength="200">
                 <span id="user-status-error" class="error"></span>
             </fieldset>
-
             <button class="popup__save-btn" type="submit">Сохранить</button>
             <button class="popup__close-btn close-btn" type="button" aria-label="Закрыть"></button>
         </form>
     </article>
+    <!--popup редактирования аватара-->
+    <article class="overlay overlay_form overlay_avatar" id="popup_avatar">
+        <form name="popup-avatar" class="popup popup_avatar popup_form" novalidate>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <fieldset class="popup__info">
+                <input id="avatar" type="url" name="userAvatar" class="popup__input popup__avatar" required>
+                <span id="avatar-error" class="error"></span>
+            </fieldset>
+            <button class="popup__save-btn" type="submit">Сохранить</button>
+            <button class="popup__close-btn close-btn" type="button" aria-label="Закрыть"></button>
+        </form>
+    </article>
+    <!--popup новой карточки-->
     <article class="overlay overlay_element" id="popup_card">
         <form name="popup-card" class="popup  popup_card popup_form" novalidate>
             <h2 class="popup__title">Новое место</h2>
@@ -57,6 +74,15 @@
             <button class="popup__close-btn popup__close-btn_element close-btn" type="button" aria-label="Закрыть"></button>
         </form>
     </article>
+    <!--popup подтверждения удаления-->
+    <article class="overlay overlay_delete popup_type_delete-confirm" id="popup_delete">
+        <form name="popup-delete" class="popup  popup_delete popup_form" novalidate>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__save-btn popup__save-btn_element" type="submit">Да</button>
+            <button class="popup__close-btn popup__close-btn_element close-btn" type="button" aria-label="Закрыть"></button>
+        </form>
+    </article>
+    <!--popuup большой фотографии-->
     <article class="overlay overlay_picture overlay_image" id="overlay_image">
         <div class="full-screen">
             <img class="full-screen__image" data-type="auto">
@@ -64,6 +90,7 @@
             <button class="full-screen__close-btn close-btn" type="button" aria-label="Закрыть"></button>
         </div>
     </article>
+    <!--template для карточки-->
     <template id="element-template">
         <div class="element">
             <button class="element__delete-btn" type="button" aria-label="Кнопка удаления"></button>
@@ -72,7 +99,11 @@
             </div>
             <div class="element__info">
                 <h2 class="element__text"></h2>
-                <button class="like element__like" type="button" aria-label="Лайк"></button>
+                <div class="like like_contener">
+                    <button class="like__btn element__like" type="button" aria-label="Лайк"></button>
+                    <span class="like__counter"></span>
+                   <!--<h2 class="like__counter"></h2>--> 
+                </div>
             </div>
         </div>
     </template>

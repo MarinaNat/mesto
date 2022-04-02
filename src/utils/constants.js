@@ -36,14 +36,17 @@ export const formsValidationConfig = {
 
 export const picture = document.querySelector('.full-screen__image');
 export const pictureTitle = document.querySelector('.full-screen__title');
+
 export const buttonProfile = document.querySelector('.profile__button-edit');
+export const buttonAvatar = document.querySelector('.profile__avatar-btn');
+export const buttonCreate = document.querySelector('.profile__button-add');
+
 export const buttonClose = document.querySelector('.close-btn ');
 export const overlayProfile = document.querySelector('.overlay_profile');
 export const overlayCard = document.querySelector('.overlay_element');
 export const overlayActive = 'overlay_active';
 export const nameInput = document.querySelector('#user-name');
-export const jobInput = document.querySelector('#user-status');
-export const buttonCreate = document.querySelector('.profile__button-add');
+export const aboutInput = document.querySelector('#user-status');
 export const cardNameInput = document.querySelector('.popup__element_type_name');
 export const cardLinkInput = document.querySelector('.popup__element_type_link');
 export const buttonCloseCard = document.querySelector('.popup__close-btn_element');
@@ -55,6 +58,9 @@ export const page = '.elements';
 export const overlayImage = '#overlay_image';
 export const popupCard = '#popup_card';
 export const profilePopupForm = '#popup_profile';
+export const avatarPopupForm = '#popup_avatar';
+export const popupDeleteForm = '#popup_delete'
 
 export const profileUserName = '.profile__user-name';
 export const profileUserStatus = '.profile__user-status';
+export const profileUserAvatar = '.profile__avatar'
