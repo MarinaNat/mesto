@@ -52,9 +52,9 @@ export class Card {
     }
 
     // удаляет карточку только со страницы; за удаление карточки с сервера отвечает deleteCard из API
-    _deleteCard(element) {
-        element.remove();
-        element = null;
+    deleteCard(element) {
+        this._element.remove();
+        this._element = null;
     };
 
     _setEventListeners() {

@@ -96,6 +96,14 @@ const createCard = (data) => {
             console.log('id', id)
             console.log('cliked button')
             confirmPopup.open()
+            confirmPopup.changeSubmitHandler(() => {
+                console.log(id)
+                api.deleteCard(id)
+                    .then(res => {
+                        card.deleteCard()
+                        confirmPopup.close()
+                    })
+            })
         }
     );
     const cardElement = card.fillingCard();
@@ -274,13 +282,15 @@ buttonCreate.addEventListener('click', () => {
     cardPopup.renderLoading(false);
 });
 
-const confirmPopup = new PopupWithForm('.popup_type_delete-confirm', () => {
-    console.log('delete!')
-    api.deleteCard('62484e073407a100bb44ae59')
-        .then((res) => {
-            console.log('res', res)
-        })
-})
+const confirmPopup = new PopupWithForm('.popup_type_delete-confirm'
+    //, () => {
+    //     console.log('delete!')
+    //     api.deleteCard('62484e073407a100bb44ae59')
+    //         .then((res) => {
+    //             console.log('res', res)
+    //         })
+    // }
+)
 profileFormValidator.enableValidation(); //вызов валидации попапа профиля
 avatarFormValidator.enableValidation() //вызов валидации попапа аватара
 cardFormValidator.enableValidation(); //вызов валидации попапа добавления карточек
