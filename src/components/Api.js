@@ -31,8 +31,6 @@ export default class API {
 
     //отправка данных профиля
     editProfile(userData) {
-        console.log('userData: ')
-        console.log(userData)
         return fetch(`${this._url}/users/me`, {
                 method: 'PATCH',
                 headers: this._headers,
@@ -46,8 +44,6 @@ export default class API {
 
     //отправка данных карты
     addCard(data) {
-        console.log('data: ')
-        console.log(data)
         return fetch(`${this._url}/cards`, {
                 method: 'POST',
                 headers: this._headers,
@@ -69,7 +65,7 @@ export default class API {
     }
 
     //добавление лайка
-    clickedLike(id) {
+    addLike(id) {
         return fetch(`${this._url}/cards/${id}/likes`, {
                 method: 'PUT',
                 headers: this._headers
@@ -78,7 +74,7 @@ export default class API {
     }
 
     //удаление лайка
-    removalLike(id) {
+    deleteLike(id) {
         return fetch(`${this._url}/cards/${id}/likes`, {
                 method: 'DELETE',
                 headers: this._headers
@@ -89,8 +85,6 @@ export default class API {
 
     //отправка данных аватарки
     updateUserAvatar(data) {
-        console.log('Аватар: ')
-        console.log(data)
         return fetch(`${this._url}/users/me/avatar`, {
                 method: 'PATCH',
                 headers: this._headers,

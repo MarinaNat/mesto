@@ -1,18 +1,17 @@
-import API from "../Api"
 import { api, userId } from "../pages";
-import PopupDeleteForm from '../components/PopupDeleteForm'
-import { popupDeleteForm } from '../utils/constants'
 
 export class Card {
-    constructor(data, cardTemplateSelector, handleImageClik, handleDeleteClik) {
+    constructor(data, cardTemplateSelector, handleImageClik, handleDeleteClik, handleLikeClik) {
             this._name = data.name
             this._link = data.link
             this._id = data.id
+            this._userId = userId
             this._likes = data.likes
-                //this._ownerId = data.owner._id
+            this._ownerId = data.ownerId
             this._cardTemplateSelector = cardTemplateSelector
             this.handleImageClik = handleImageClik
             this._handleDeleteClik = handleDeleteClik
+            this._handleLikeClik = handleLikeClik
         }
         //получаем разметку карточки
     _getTemplate() {
@@ -35,20 +34,34 @@ export class Card {
         this._cardFoto.src = this._link;
         this._cardText.textContent = this._name;
         this._cardFoto.alt = this._name;
-        this._setLikes()
+        this.setLikes(this._likes)
         return this._element;
     };
 
-    _like() {
-        console.log('лайк this: ')
-        console.log(this._likes.length)
-        this._likeButton.classList.toggle('element__like_active');
+    _unfillLike() {
+        this._likeButton.classList.remove('element__like_active');
+    };
+
+    _fillLike() {
+        this._likeButton.classList.add('element__like_active');
     };
 
     //добавленеие счета лайков
-    _setLikes() {
+    setLikes(newLikes) {
+        this._likes = newLikes
         const likeCountElement = this._element.querySelector('.like__counter')
         likeCountElement.textContent = this._likes.length
+
+        if (this.isLiked()) {
+            this._fillLike()
+        } else {
+            this._unfillLike()
+        }
+    }
+
+    isLiked() {
+        const userHasLikedCard = this._likes.find(user => user._id === this._userId)
+        return userHasLikedCard
     }
 
     // удаляет карточку только со страницы; за удаление карточки с сервера отвечает deleteCard из API
@@ -63,14 +76,16 @@ export class Card {
         this._cardText = this._element.querySelector('.element__text');
         this._likeButton = this._element.querySelector('.like__btn');
         this._deleteButton = this._element.querySelector('.element__delete-btn');
-        // if (!(this._ownerId === userId)) {
-        //     this._element.querySelector('.element__delete-btn').style.display = 'none';
-        // }
+
+        //если ownerId(на карточке) не совпадает с Id пользователя, кнопка удаления прячется
+        if (!(this._ownerId === userId)) {
+            this._element.querySelector('.element__delete-btn').style.display = 'none';
+        }
 
 
         //подписки
         this._likeButton.addEventListener('click', () => {
-            this._like()
+            this._handleLikeClik(this._id)
         });
 
         //слушатель кнопки удаления

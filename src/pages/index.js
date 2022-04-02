@@ -21,7 +21,6 @@ import {
     popupCard,
 
     page,
-    popupDeleteForm
 }
 from '../utils/constants.js'
 import { Card } from '../components/Card.js'
@@ -29,8 +28,7 @@ import Section from '../components/Section.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import UserInfo from '../components/UserInfo.js'
-import API from '../Api.js'
-import PopupDeleteForm from '../components/PopupDeleteForm'
+import API from '../components/Api.js'
 
 export let userId
 
@@ -51,33 +49,23 @@ export const api = new API({
 });
 
 api.getProfile().then((userData) => {
-    console.log('Ответ профиль: ')
-    console.log(userData);
     userId = userData._id;
     userInfo.setUserInfo(userData);
-    //userId = obj._id;
-    //console.log('Ответ профильID: ')
-    // console.log(userId);
 });
 
 api.getCard().then((cardList) => {
-    console.log('Массив карточек, считанных с сервера: ');
-    console.log(cardList);
     cardList.forEach(data => {
         const card = createCard({
             name: data.name,
             link: data.link,
             likes: data.likes,
-            id: data._id
+            id: data._id,
+            userId: userId,
+            ownerId: data.owner._id
         })
         section.addItem(card)
     });
-    // section.renderItems(cardList)
-    // console.log('Раскрываем карты: ')
-    //obj.forEach((item) => console.log(item));
-    // }).catch((err) => {
-    //     console.log('Ошибка карты')
-    //     console.log(err)
+
 });
 
 const profileFormValidator = new FormValidator(formsValidationConfig, profilePopupForm);
@@ -90,20 +78,29 @@ const createCard = (data) => {
         '#element-template',
         (item) =>
         handleCard(item),
-        //  (item) => 
-        //  handleDeleteCard(item));
         (id) => {
-            console.log('id', id)
-            console.log('cliked button')
             confirmPopup.open()
             confirmPopup.changeSubmitHandler(() => {
-                console.log(id)
                 api.deleteCard(id)
                     .then(res => {
                         card.deleteCard()
                         confirmPopup.close()
                     })
             })
+        },
+        (id) => {
+            if (card.isLiked()) {
+                api.deleteLike(id)
+                    .then(res => {
+                        card.setLikes(res.likes)
+                    })
+
+            } else {
+                api.addLike(id)
+                    .then(res => {
+                        card.setLikes(res.likes)
+                    })
+            }
         }
     );
     const cardElement = card.fillingCard();
@@ -124,63 +121,16 @@ const section = new Section({
 const popupWithImage = new PopupWithImage(overlayImage);
 
 const handleCard = (item) => {
-    // колбэк карты при нажатии на неё:
-    // {
-    //     name: this._name,
-    //     link: this._link,
-    //     id: this._id,
-    //     ownerId: this._ownerId,
-    //     likes: this._likes
-    // }
     const data = {
         name: item.name,
         link: item.link,
         id: item._id,
         ownerId: item.ownerId,
-        likes: item.likes
+        likes: item.likes,
+        userId: userId,
+        //ownerId: item.owner._id
     }
     popupWithImage.open({ name: data.name, link: data.link });
-}
-
-
-
-// const popupDelConfirmation = new PopupDeleteForm(popupDeleteForm, (card) => {
-//     api.deleteCard(card._id)
-//         // .then(() => {
-
-//     //     // удаление из html старого набора карточек
-//     //     // нужно удалить из html старого набора карточек (иначе новые просто добавляются к старым)
-//     //     const cards_section = document.querySelector('.elements')
-//     //     const cards_number = cards_section.childElementCount
-//     //     var counter = 0
-//     //     while (counter < cards_number) {
-//     //         cards_section.firstElementChild.remove();
-//     //         counter++;
-//     //     }
-
-//     //     // загрузка карточек с сервера
-//     //     api.getCard()
-//     //         .then((obj) => {
-//     //             cardsList.renderItems(obj); // отрисовка карточек
-//     //         }).catch((err) => {
-//     //             console.log('Ошибка карты')
-//     //             console.log(err)
-//     //         });
-
-//     //     cardPopup.close()
-//     // });
-
-//     console.log('call-back handleConfirm from PopupDeleteForm: объект card:')
-//     console.log(card)
-//     console.log('call-back handleConfirm from PopupDeleteForm: card._id:')
-//     console.log(card._id)
-//     console.log('Сейчас выскочит алерт...')
-//     alert('См. консоль')
-
-// });
-
-const handleDeleteCard = (card) => {
-    popupDelConfirmation.open(card);
 }
 
 //создание карточки из попапа
@@ -189,7 +139,6 @@ const cardPopup = new PopupWithForm(popupCard, (data) => {
     // отправка карточки на сервер
     api.addCard(data)
         .then((res) => {
-            console.log('res', res)
             const card = createCard({
                 name: res.name,
                 link: res.link,
@@ -198,26 +147,6 @@ const cardPopup = new PopupWithForm(popupCard, (data) => {
             });
             section.addItem(card);
             cardPopup.close()
-                // удаление из html старого набора карточек
-                // нужно удалить из html старого набора карточек (иначе новые просто добавляются к старым)
-                // const cards_section = document.querySelector('.elements')
-                // const cards_number = cards_section.childElementCount
-                // var counter = 0
-                // while (counter < cards_number) {
-                //     cards_section.firstElementChild.remove();
-                //     counter++;
-                // }
-
-            // загрузка карточек с сервера
-            // api.getCard()
-            //     .then((obj) => {
-            //         section.renderItems(obj); // отрисовка карточек
-            //     }).catch((err) => {
-            //         console.log('Ошибка карты')
-            //         console.log(err)
-            //     });
-
-            // cardPopup.close()
         });
 });
 
@@ -226,8 +155,6 @@ const editProfilPopup = new PopupWithForm(profilePopupForm, (userData) => {
     editProfilPopup.renderLoading(true);
     api.editProfile(userData)
         .then((obj) => {
-            console.log('Попап профиля: ')
-            console.log(obj)
             userInfo.setUserInfo(obj);
             editProfilPopup.close();
         })
@@ -244,8 +171,6 @@ const popupAvatar = new PopupWithForm(avatarPopupForm, (avatarData) => {
     popupAvatar.renderLoading(true);
     api.updateUserAvatar(avatarData)
         .then((obj) => {
-            console.log('Попап аватар: ')
-            console.log(obj)
             userInfo.setUserAvatar(obj);
             popupAvatar.close();
         })
@@ -282,15 +207,9 @@ buttonCreate.addEventListener('click', () => {
     cardPopup.renderLoading(false);
 });
 
-const confirmPopup = new PopupWithForm('.popup_type_delete-confirm'
-    //, () => {
-    //     console.log('delete!')
-    //     api.deleteCard('62484e073407a100bb44ae59')
-    //         .then((res) => {
-    //             console.log('res', res)
-    //         })
-    // }
-)
+//для удаления карточки
+const confirmPopup = new PopupWithForm('.popup_type_delete-confirm')
+
 profileFormValidator.enableValidation(); //вызов валидации попапа профиля
 avatarFormValidator.enableValidation() //вызов валидации попапа аватара
 cardFormValidator.enableValidation(); //вызов валидации попапа добавления карточек
