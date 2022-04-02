@@ -208,7 +208,7 @@ buttonCreate.addEventListener('click', () => {
 });
 
 //для удаления карточки
-const confirmPopup = new PopupWithForm('.popup_type_delete-confirm')
+const confirmPopup = new PopupWithForm('.overlay_type_delete-confirm')
 
 profileFormValidator.enableValidation(); //вызов валидации попапа профиля
 avatarFormValidator.enableValidation() //вызов валидации попапа аватара
