@@ -48,25 +48,28 @@ export const api = new API({
     }
 });
 
-api.getProfile().then((userData) => {
-    userId = userData._id;
-    userInfo.setUserInfo(userData);
-});
+Promise.all([api.getProfile(), api.getCard()])
+    .then(([userData, cardList]) => {
+        // тут установка данных пользователя
+        userId = userData._id;
+        userInfo.setUserInfo(userData);
+        // и тут отрисовка карточек
+        cardList.forEach(data => {
+            const card = createCard({
+                name: data.name,
+                link: data.link,
+                likes: data.likes,
+                id: data._id,
+                userId: userId,
+                ownerId: data.owner._id
+            })
+            section.addItem(card)
+        });
+    }) // тут ловим ошибку
+    .catch((err) => {
+        console.log(err);
 
-api.getCard().then((cardList) => {
-    cardList.forEach(data => {
-        const card = createCard({
-            name: data.name,
-            link: data.link,
-            likes: data.likes,
-            id: data._id,
-            userId: userId,
-            ownerId: data.owner._id
-        })
-        section.addItem(card)
     });
-
-});
 
 const profileFormValidator = new FormValidator(formsValidationConfig, profilePopupForm);
 const avatarFormValidator = new FormValidator(formsValidationConfig, avatarPopupForm)
@@ -86,6 +89,10 @@ const createCard = (data) => {
                         card.deleteCard()
                         confirmPopup.close()
                     })
+                    .catch((err) => {
+                        console.log(err);
+
+                    });
             })
         },
         (id) => {
@@ -94,12 +101,20 @@ const createCard = (data) => {
                     .then(res => {
                         card.setLikes(res.likes)
                     })
+                    .catch((err) => {
+                        console.log(err);
+
+                    });
 
             } else {
                 api.addLike(id)
                     .then(res => {
                         card.setLikes(res.likes)
                     })
+                    .catch((err) => {
+                        console.log(err);
+
+                    });
             }
         }
     );
@@ -143,10 +158,15 @@ const cardPopup = new PopupWithForm(popupCard, (data) => {
                 name: res.name,
                 link: res.link,
                 likes: res.likes,
-                id: res._id
+                id: res._id,
+                ownerId: res.owner._id
             });
             section.addItem(card);
             cardPopup.close()
+        })
+        .catch((err) => {
+            console.log(err);
+
         });
 });
 
@@ -195,6 +215,7 @@ buttonProfile.addEventListener('click', () => {
 //слушатель на кнопку открытия попапа "Редактирование аватара"
 buttonAvatar.addEventListener('click', () => {
     popupAvatar.open();
+    avatarFormValidator.setSubmitButtonState()
     popupAvatar.renderLoading(false);
     avatarFormValidator.resetError();
 });

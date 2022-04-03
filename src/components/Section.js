@@ -9,7 +9,7 @@ export default class Section {
 
     //добавление элемента в DOM
     addItem(element) {
-        this._container.append(element);
+        this._container.prepend(element);
     }
 
     //перебираем массив
